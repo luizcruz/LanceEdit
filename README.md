@@ -24,10 +24,13 @@ Chrome extension (Manifest V3) that injects a floating pencil button on Lance pa
 
 Open the extension popup and click **Settings**, or go to `chrome://extensions/` → LanceEdit → **Details** → **Extension options**.
 
-| Setting | Default | Description |
-|---|---|---|
-| Site Domain | `www.lance.com.br` | The site where the button is shown |
-| CMS Domain | `cms.lancecorp.com.br` | The WordPress admin domain for edit links |
+| Setting | Description |
+|---|---|
+| Site Domain | The site where the pencil button is shown |
+| CMS Domain | The WordPress admin domain for edit links |
+| Root Category ID | WordPress term ID used for the homepage category link |
+
+> **Before using:** open the extension options page and fill in all three fields.
 
 Settings are synced via `chrome.storage.sync`.
 

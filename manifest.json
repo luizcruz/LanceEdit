@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Floating edit button for Lance CMS pages",
   "permissions": ["storage", "scripting"],
-  "host_permissions": ["*://*.lance.com.br/*"],
+  "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
   },

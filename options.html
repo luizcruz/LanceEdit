@@ -73,19 +73,24 @@
       </svg>
       <div>
         <h1>LanceEdit</h1>
-        <p>Configure domains</p>
+        <p>Configure settings</p>
       </div>
     </div>
     <div class="card-body">
       <div class="field">
         <label for="siteDomain">Site Domain</label>
-        <input type="text" id="siteDomain" placeholder="www.lance.com.br">
+        <input type="text" id="siteDomain" placeholder="e.g. www.example.com">
         <div class="hint">The domain where the pencil button appears</div>
       </div>
       <div class="field">
         <label for="cmsDomain">CMS Domain</label>
-        <input type="text" id="cmsDomain" placeholder="cms.lancecorp.com.br">
+        <input type="text" id="cmsDomain" placeholder="e.g. cms.example.com">
         <div class="hint">The WordPress admin domain for edit links</div>
+      </div>
+      <div class="field">
+        <label for="rootCategoryId">Root Category ID</label>
+        <input type="text" id="rootCategoryId" placeholder="e.g. 123">
+        <div class="hint">WordPress term ID used for the homepage category link</div>
       </div>
       <div class="actions">
         <button id="saveBtn">Save</button>

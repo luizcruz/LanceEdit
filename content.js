@@ -1,7 +1,7 @@
 (async () => {
-  const { siteDomain, cmsDomain } = await chrome.storage.sync.get(['siteDomain', 'cmsDomain']);
+  const { siteDomain, cmsDomain, rootCategoryId } = await chrome.storage.sync.get(['siteDomain', 'cmsDomain', 'rootCategoryId']);
 
-  if (!siteDomain || !cmsDomain) return;
+  if (!siteDomain || !cmsDomain || !rootCategoryId) return;
 
   function matchesDomain(hostname, configured) {
     const strip = (h) => h.replace(/^www\./, '');
@@ -27,7 +27,7 @@
     if (!isRoot && !pageId) return;
 
     const rootUrl =
-      `https://${cmsDomain}/wp-admin/term.php?taxonomy=category&tag_ID=19228&post_type=post&wp_http_referer=%2Fwp-admin%2Fedit-tags.php%3Ftaxonomy%3Dcategory`;
+      `https://${cmsDomain}/wp-admin/term.php?taxonomy=category&tag_ID=${rootCategoryId}&post_type=post&wp_http_referer=%2Fwp-admin%2Fedit-tags.php%3Ftaxonomy%3Dcategory`;
     const editUrl =
       `https://${cmsDomain}/wp-admin/post.php?post=${pageId}&action=edit`;
 
