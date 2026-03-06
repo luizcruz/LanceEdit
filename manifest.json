@@ -3,7 +3,8 @@
   "name": "LanceEdit",
   "version": "1.0.0",
   "description": "Floating edit button for Lance CMS pages",
-  "permissions": ["storage"],
+  "permissions": ["storage", "scripting"],
+  "host_permissions": ["*://*.lance.com.br/*"],
   "background": {
     "service_worker": "background.js"
   },

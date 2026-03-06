@@ -10,21 +10,9 @@
 
   if (!matchesDomain(window.location.hostname, siteDomain)) return;
 
-  // Inject script into page's main world to read window.customData
-  const script = document.createElement('script');
-  script.textContent = `
-    (function() {
-      var payload = null;
-      try {
-        if (window.customData && window.customData.page) {
-          payload = { id: window.customData.page.id };
-        }
-      } catch (e) {}
-      window.postMessage({ type: '__LANCE_EDIT_DATA__', payload: payload }, '*');
-    })();
-  `;
-  (document.head || document.documentElement).appendChild(script);
-  script.remove();
+  // Ask the background service worker to execute injected.js in the MAIN world.
+  // Direct <script> injection is blocked by the page's CSP; chrome.scripting bypasses it.
+  chrome.runtime.sendMessage({ type: 'INJECT_MAIN_WORLD' });
 
   // Receive data from injected script
   window.addEventListener('message', function handler(event) {
