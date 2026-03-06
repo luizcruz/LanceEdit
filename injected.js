@@ -9,7 +9,7 @@
       if (window.match_id) {
         matchId = String(window.match_id);
       } else {
-        var m = document.documentElement.innerHTML.match(/"match_id"\s*:\s*(\d+)/);
+        var m = document.documentElement.innerHTML.match(/\\?"match_id\\?"\s*:\s*(\d+)/);
         if (m) matchId = m[1];
       }
       payload = { matchId: matchId };
