@@ -1,7 +1,3 @@
-Para orientar um agente como o Claude Code a criar uma extensão seguindo as melhores práticas da documentação oficial do Chrome (Manifest V3), o seu arquivo Markdown deve ser estruturado como um "System Prompt" ou um "Guia de Implementação".
-
-Aqui está um modelo otimizado que você pode usar ou adaptar. Ele foca na estrutura de arquivos, permissões e no ciclo de vida da extensão:
-
 Guia de Implementação: Extensão Chrome (Manifest V3)
 Você é um especialista em desenvolvimento de extensões para Google Chrome. Sua tarefa é criar uma extensão seguindo estritamente a documentação do Chrome Developers (MV3).
 
