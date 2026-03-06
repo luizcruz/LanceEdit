@@ -29,8 +29,11 @@ Open the extension popup and click **Settings**, or go to `chrome://extensions/`
 | Site Domain | The site where the pencil button is shown |
 | CMS Domain | The WordPress admin domain for edit links |
 | Root Category ID | WordPress term ID used for the homepage category link |
+| Temporeal CMS Domain | Admin domain for `/temporeal/partida/` and `/temporeal/evento/` pages |
 
-> **Before using:** open the extension options page and fill in all three fields.
+> **Before using:** open the extension options page and fill in all required fields. The Temporeal CMS Domain is only needed if the site has temporeal pages.
+
+On temporeal pages the extension reads `match_id` from the page source and links to `https://<temporeal-cms>/admin/partidas/<match_id>`.
 
 Settings are synced via `chrome.storage.sync`.
 

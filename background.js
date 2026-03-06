@@ -3,6 +3,7 @@ chrome.runtime.onInstalled.addListener(() => {
     siteDomain: '',
     cmsDomain: '',
     rootCategoryId: '',
+    realtimeDomain: '',
   });
 });
 

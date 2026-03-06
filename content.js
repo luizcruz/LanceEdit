@@ -1,5 +1,5 @@
 (async () => {
-  const { siteDomain, cmsDomain, rootCategoryId } = await chrome.storage.sync.get(['siteDomain', 'cmsDomain', 'rootCategoryId']);
+  const { siteDomain, cmsDomain, rootCategoryId, realtimeDomain } = await chrome.storage.sync.get(['siteDomain', 'cmsDomain', 'rootCategoryId', 'realtimeDomain']);
 
   if (!siteDomain || !cmsDomain || !rootCategoryId) return;
 
@@ -21,18 +21,29 @@
     window.removeEventListener('message', handler);
 
     const pathname = window.location.pathname;
-    const isRoot = pathname === '/' || pathname === '';
+    const isTemporeal = pathname.includes('/temporeal/partida/') ||
+                        pathname.includes('/temporeal/evento/');
+    const isRoot = !isTemporeal && (pathname === '/' || pathname === '');
     const pageId = event.data.payload && event.data.payload.id;
+    const matchId = event.data.payload && event.data.payload.matchId;
 
-    if (!isRoot && !pageId) return;
-
-    const rootUrl =
-      `https://${cmsDomain}/wp-admin/term.php?taxonomy=category&tag_ID=${rootCategoryId}&post_type=post&wp_http_referer=%2Fwp-admin%2Fedit-tags.php%3Ftaxonomy%3Dcategory`;
-    const editUrl =
-      `https://${cmsDomain}/wp-admin/post.php?post=${pageId}&action=edit`;
+    let url, btnTitle;
+    if (isTemporeal) {
+      if (!matchId || !realtimeDomain) return;
+      url = `https://${realtimeDomain}/admin/partidas/${matchId}`;
+      btnTitle = 'Edit in Temporeal';
+    } else if (isRoot) {
+      url = `https://${cmsDomain}/wp-admin/term.php?taxonomy=category&tag_ID=${rootCategoryId}&post_type=post&wp_http_referer=%2Fwp-admin%2Fedit-tags.php%3Ftaxonomy%3Dcategory`;
+      btnTitle = 'Manage categories';
+    } else if (pageId) {
+      url = `https://${cmsDomain}/wp-admin/post.php?post=${pageId}&action=edit`;
+      btnTitle = 'Edit in CMS';
+    } else {
+      return;
+    }
 
     const btn = document.createElement('button');
-    btn.title = isRoot ? 'Manage categories' : 'Edit in CMS';
+    btn.title = btnTitle;
     btn.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
            stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -64,7 +75,7 @@
     btn.addEventListener('mouseleave', () => { btn.style.transform = 'scale(1)'; });
 
     btn.addEventListener('click', () => {
-      window.open(isRoot ? rootUrl : editUrl, '_blank');
+      window.open(url, '_blank');
     });
 
     document.body.appendChild(btn);
